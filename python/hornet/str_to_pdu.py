@@ -32,7 +32,8 @@ class str_to_pdu(gr.basic_block):
         #print("Type of the message: ",type(p_var))
         #print("Type of the first element: ", type(p_var[0]))
         #print("Type of the second element: ", type(p_var[1]))
-        s_value = p_var[1] + " " + str(self.counter) + "\n" # adding message number to be easier identified in the receiver
+        # added fixed sized representation of the message number indicated by counter variable (now its ten, aligned to the left) 
+        s_value = p_var[1] + " " + '{:<10d}'.format(self.counter) + "\n" # adding message number to be easier identified in the receiver
         #ascii_list = [int(ord(v)) for v in p_var[1]]
         ascii_list = [int(ord(v)) for v in s_value]        
         vector = pmt.init_u8vector(len(ascii_list), ascii_list)
